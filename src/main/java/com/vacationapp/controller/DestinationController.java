@@ -5,6 +5,7 @@ import com.vacationapp.service.DestinationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -34,4 +35,9 @@ public class DestinationController {
         return "countries";
     }
 
+    @GetMapping("/cities/{country}")
+    public String getCities(Model model, @PathVariable String country) {
+        model.addAttribute("cities", destinationService.getCities(country));
+        return "cities";
+    }
 }
