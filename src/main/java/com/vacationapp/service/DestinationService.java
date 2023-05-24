@@ -34,17 +34,10 @@ public class DestinationService {
         return country;
     }
 
-    public List<String> getCities(String name) {
-        List<DestinationInfo> listOfDestination = getAllDestinations();
-        List<String> cities = new ArrayList<>();
-
-        for (DestinationInfo destinationInfo : listOfDestination) {
-            if (destinationInfo.getCity().equals(name)) {
-                cities.add(destinationInfo.getCity());
-            }
-        }
-        return cities;
+    public List<DestinationInfo> getCitiesFromDatabase(String name) {
+        return this.destinationRepository.findAllByCountry(name);
     }
+
 
 
 }

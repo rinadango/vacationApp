@@ -10,4 +10,7 @@ import java.util.List;
 public interface DestinationRepository extends JpaRepository<DestinationInfo, Integer> {
 
     //List<DestinationInfo> findDistinctByCountryAndCountryIsNotEmpty();
+
+
+    List<DestinationInfo> findAllByCountry(String country);
 }

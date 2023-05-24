@@ -20,24 +20,21 @@ public class DestinationController {
 
     @GetMapping("/all")
     public String getAll(Model model){
-
         model.addAttribute("destinations", destinationService.getAllDestinations());
-
         return "allDestinations";
 
     }
 
     @GetMapping("/countries")
     public String getCountries(Model model){
-
         model.addAttribute("countries", destinationService.getAllDestinationCountry());
-
         return "countries";
     }
 
     @GetMapping("/cities/{country}")
     public String getCities(Model model, @PathVariable String country) {
-        model.addAttribute("cities", destinationService.getCities(country));
+        model.addAttribute("cities", destinationService.getCitiesFromDatabase(country));
         return "cities";
     }
+
 }

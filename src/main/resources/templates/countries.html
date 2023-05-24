@@ -9,7 +9,7 @@
 <body>
 
 <h2>Values in the Set:</h2>
-<div th:each="country : ${countries}">
+<div class="container" th:each="country : ${countries}">
     <a class="btn btn-info m-2 " th:href="@{'/cities/' + ${country}}" th:text="${country}"></a>
 </div>
 

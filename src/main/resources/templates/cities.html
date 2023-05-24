@@ -7,6 +7,8 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container" th:each="city : ${cities}">
+    <h3 class="btn btn-info m-2 " th:text="${city.getCity()}"></h3>
+</div>
 </body>
 </html>
