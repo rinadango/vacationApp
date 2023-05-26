@@ -30,34 +30,31 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Budget</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your vacation budget">
+                <small id="emailHelp" class="form-text text-muted">Enter maximum budget.</small>
             </div>
             <div class="form-group">
-                <label class="col-sm-1 col-form-label">Date</label>
-                <div class="col-sm-4">
-                    <div class="input-group date" id="datepicker">
-                        <input type="text" class="form-control">
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-white">
-                                <i class="fa fa-calendar"></i>
-                            </span>
+                <label for="datepicker">Vacation start</label>
+                <div class="input-group date" id="datepicker">
+                    <input type="text" class="form-control">
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-white">
+                            <i class="fa fa-calendar"></i>
                         </span>
-                    </div>
+                    </span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-1 col-form-label">Date</label>
-                <div class="col-sm-4">
-                    <div class="input-group date" id="datepicker2">
-                        <input type="text" class="form-control">
-                        <span class="input-group-append">
-                            <span class="input-group-text bg-white">
-                                <i class="fa fa-calendar"></i>
-                            </span>
+                <label for="datepicker2">Vacation end</label>
+                <div class="input-group date" id="datepicker2">
+                    <input type="text" class="form-control">
+                    <span class="input-group-append">
+                        <span class="input-group-text bg-white">
+                            <i class="fa fa-calendar"></i>
                         </span>
-                    </div>
+                    </span>
                 </div>
+
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -67,10 +64,10 @@
 
 <script type="text/javascript">
     $(function() {
-        $('#datepicker').datepicker();
+        $('#datepicker').datepicker({"format": "yyyy-mm-dd"});
     });
     $(function() {
-        $('#datepicker2').datepicker();
+        $('#datepicker2').datepicker({"format": "yyyy-mm-dd"});
     });
 </script>
 
