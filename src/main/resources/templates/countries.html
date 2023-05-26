@@ -8,10 +8,14 @@
 </head>
 <body>
 
-<h2>Values in the Set:</h2>
-<div class="container" th:each="country : ${countries}">
-    <a class="btn btn-info m-2 " th:href="@{'/cities/' + ${country}}" th:text="${country}"></a>
+<div class="container justify-content-center" style="padding-top: 14px">
+    <div class="row">
+        <div class="col-md-3" th:each="country : ${countries}">
+            <div class="col"><a class="btn btn-info btn-lg btn-block" style="width:200px; padding: 50px; margin: 20px" th:href="@{'/cities/' + ${country}}" th:text="${country}"></a></div>
+        </div>
+    </div>
 </div>
+
 
 
 
