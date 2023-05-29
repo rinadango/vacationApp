@@ -34,6 +34,5 @@ public class DestinationController {
         return "cities";
     }
 
-
 }
 
