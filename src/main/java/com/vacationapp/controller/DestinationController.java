@@ -18,7 +18,6 @@ public class DestinationController {
     public String getAll(Model model){
         model.addAttribute("destinations", destinationService.getAllDestinations());
         return "allDestinations";
-
     }
 
     @GetMapping("/countries")
@@ -32,29 +31,6 @@ public class DestinationController {
         model.addAttribute("cities", destinationService.getCitiesFromDatabase(country));
 
         return "cities";
-    }
-
-    @GetMapping("/proposal")
-    public String showProposalPage(){
-
-        return "proposal";
-    }
-
-    @PostMapping("/proposal")
-    public String submitForm(@RequestParam("city") String city,
-                             @RequestParam("budget") String budget,
-                             @RequestParam("startOfVacation") String startOfVacation,
-                             @RequestParam("endOfVacation") String endOfVacation,
-                             Model model) {
-        // Process the form data (e.g., save it to a database)
-
-        // Pass the form data to the view
-        model.addAttribute("city", city);
-        model.addAttribute("budget", budget);
-        model.addAttribute("startVaca", startOfVacation);
-        model.addAttribute("endVaca", endOfVacation);
-
-        return "proposal";
     }
 
 }
