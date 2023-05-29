@@ -18,7 +18,6 @@ public class DestinationController {
     public String getAll(Model model){
         model.addAttribute("destinations", destinationService.getAllDestinations());
         return "allDestinations";
-
     }
 
     @GetMapping("/countries")
