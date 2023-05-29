@@ -36,28 +36,17 @@
                         <label for="budgetInput">Budget</label>
                         <input type="text" class="form-control" id="budgetInput"
                                placeholder="Enter your vacation budget">
-                        <small id="emailHelp" class="form-text text-muted">Enter maximum budget.</small>
                     </div>
                     <div class="form-group">
-                        <label for="datepicker">Vacation start</label>
-                        <div class="input-group date" id="datepicker">
-                            <input type="text" class="form-control">
-                            <span class="input-group-append">
-                        <span class="input-group-text bg-white">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </span>
+                        <label for="vacationStart">Vacation start</label>
+                        <div class="input-group date" id="vacationStart">
+                            <input type="date" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="datepicker2">Vacation end</label>
-                        <div class="input-group date" id="datepicker2">
-                            <input type="text" class="form-control">
-                            <span class="input-group-append">
-                        <span class="input-group-text bg-white">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </span>
+                        <label for="vacationEnd">Vacation end</label>
+                        <div class="input-group date" id="vacationEnd">
+                            <input type="date" class="form-control">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -67,14 +56,14 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $(function () {
-        $('#datepicker').datepicker({"format": "yyyy-mm-dd"});
-    });
-    $(function () {
-        $('#datepicker2').datepicker({"format": "yyyy-mm-dd"});
-    });
-</script>
+<!--<script type="text/javascript">-->
+<!--    $(function () {-->
+<!--        $('#datepicker').datepicker({"format": "yyyy-mm-dd"});-->
+<!--    });-->
+<!--    $(function () {-->
+<!--        $('#datepicker2').datepicker({"format": "yyyy-mm-dd"});-->
+<!--    });-->
+<!--</script>-->
 
 </body>
 
