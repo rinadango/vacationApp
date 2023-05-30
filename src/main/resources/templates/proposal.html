@@ -14,11 +14,80 @@
 </head>
 <body>
 
-<p><span th:text="${city}"></span></p>
-<p><span th:text="${budget}"></span></p>
-<p><span th:text="${startVaca}"></span></p>
-<p><span th:text="${endVaca}"></span></p>
+<!-- Weather-->
+<h1>Travel proposal for your vacation to <span th:text="${#strings.capitalize(city)}"></span></h1>
+<div class="weather-info">
+  <h2>Current Weather Information</h2>
+  <p>Temperature: <span th:text="${temperature} + ' ℃'"></span></p>
+  <p>Feels like: <span th:text="${feelsLike} + ' ℃'"></span></p>
+  <p>Humidity: <span th:text="${humidity} + ' %'"></span></p>
+  <p>Weather Description: <span th:text="${description}"></span></p>
+  <p>Wind Speed: <span th:text="${windSpeed} + ' km/h'"></span></p>
+</div>
+<br>
 
+<!--Jei kazkas neveiktu, atkomentuoti patikrinimui -->
+<!--<p>destination city: <span th:text="${city}"></span></p>
+<p>destination country: <span th:text="${country}"></span></p>
+<p>departure city: <span th:text="${departureCity}"></span></p>
+<p>departure country: <span th:text="${departureCountry}"></span></p>
+<p>start of vacation: <span th:text="${startOfVacation}"></span></p>
+<p>end of vacation: <span th:text="${endOfVacation}"></span></p>-->
+
+<!--Booking-->
+<div id="booking">
+  <h2>Booking.com Search for <span th:text="${#strings.capitalize(city)}"></span></h2>
+  <!--type="hidden", nes nebenoriu, kad rodytu inputo laukus (vertes jau ivestos per forma), noriu matyti tik mygtuka-->
+  <!--Jei kyla klausimas, kodel nekonstravau tokio linko, kaip su Kiwi.com (zemiau), tai todel, nes su booking.com taip kazkodel neveikia-->
+  <form action="https://www.booking.com/searchresults.en-us.html" method="get" target="_blank">
+    <input type="hidden" name="ss" th:value="${city}"/>
+    <input type="hidden" name="checkin" th:value="${startOfVacation}"/>
+    <input type="hidden" name="checkout" th:value="${endOfVacation}"/>
+    <input type="hidden" name="nflt" th:value="${budget}"/>
+    <input type="hidden" name="group_adults" value="1"/>
+    <input type="hidden" name="order" value="review_score_and_price"/>
+    <button class="btn btn-primary btn-lg" type="submit">Booking.com for <span th:text="${#strings.capitalize(city)}"></span></button>
+  </form>
+</div>
+<br>
+
+<!--Plane tickets-->
+<div id="plane-tickets">
+  <h2>Kiwi.com Search for <span th:text="${#strings.capitalize(city)}"></span></h2>
+
+  <th:block th:if="${country == 'united kingdom'}">
+    <form th:action="@{'https://www.kiwi.com/en/search/results/' + ${departureCity} + '-' + ${departureCountry} + '/' + ${city} + '-united-kingdom/' + ${startOfVacation} + '/' + ${endOfVacation}}"
+          target="_blank">
+      <button class="btn btn-primary btn-lg" type="submit">Kiwi.com for <span th:text="${#strings.capitalize(city)}"></span></button>
+    </form>
+  </th:block>
+
+  <th:block th:if="${city == 'the hague'}">
+    <form th:action="@{'https://www.kiwi.com/en/search/results/' + ${departureCity} + '-' + ${departureCountry} + '/the-hague-' + ${country} + '/' + ${startOfVacation} + '/' + ${endOfVacation}}"
+          target="_blank">
+      <button class="btn btn-primary btn-lg" type="submit">Kiwi.com for <span th:text="${#strings.capitalize(city)}"></span></button>
+    </form>
+  </th:block>
+
+  <th:block th:unless="${country == 'united kingdom' || city == 'the hague'}">
+    <form th:action="@{'https://www.kiwi.com/en/search/results/' + ${departureCity} + '-' + ${departureCountry} + '/' + ${city} + '-' + ${country} + '/' + ${startOfVacation} + '/' + ${endOfVacation}}"
+          target="_blank">
+      <button class="btn btn-primary btn-lg" type="submit">Kiwi.com for <span th:text="${#strings.capitalize(city)}"></span></button>
+    </form>
+  </th:block>
+</div>
+<br>
+
+<!--Wikipedia-->
+<div id="wikipedia">
+  <h2>Wikipedia Search for <span th:text="${#strings.capitalize(city)}"></span></h2>
+  <div class="wikipedia">
+    <form th:action="@{'https://en.wikipedia.org/wiki/' + ${city}}" target="_blank">
+      <button class="btn btn-primary btn-lg" type="submit">Wikipedia for <span th:text="${#strings.capitalize(city)}"></span></button>
+
+    </form>
+  </div>
+</div>
 
 </body>
 </html>
