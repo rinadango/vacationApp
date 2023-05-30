@@ -2,6 +2,7 @@ package com.vacationapp.controller;
 
 import com.vacationapp.weatherApi.Weather;
 import com.vacationapp.weatherApi.WeatherAPI;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class FormController {
 
+    @Value("${api.key}")
+    private String apiKey;
 
     @GetMapping("/proposal")
     public String showProposalPage(){
@@ -27,7 +30,7 @@ public class FormController {
                                            @RequestParam("departureCountry") String departureCountry,
                                            Model model) {
 
-        WeatherAPI weatherAPI = new WeatherAPI();
+        WeatherAPI weatherAPI = new WeatherAPI(apiKey);
         Weather currentWeather = weatherAPI.getWeather(city);
 
         model.addAttribute("temperature", currentWeather.getTemperature());

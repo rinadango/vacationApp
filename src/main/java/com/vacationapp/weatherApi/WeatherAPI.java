@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.net.URL;
 import java.util.Locale;
@@ -11,11 +12,14 @@ import java.util.Locale;
 @AllArgsConstructor
 @Data
 public class WeatherAPI {
+
+    @Value("${api.key}")
+    private String apiKey;
+
     public Weather getWeather(String city) {
 
         Weather currentWeather = new Weather(); //i sita objekta bus sudetos visos gautos vertes, paskui jas gausim ir naudosim su model.addAttribute
         ObjectMapper objectMapper = new ObjectMapper();
-        String apiKey = "6d48803efc881326bec94c30df0addac";
 
         try {
             //Geolocation API, skirtas miesta paversti i latitude ir longitude kintamuosius, kuriuos veliau naudojam weather API requeste
