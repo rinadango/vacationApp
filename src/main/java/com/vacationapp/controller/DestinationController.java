@@ -12,7 +12,6 @@ import java.util.List;
 
 @Controller
 public class DestinationController {
-
     private final DestinationService destinationService;
 
     public DestinationController(DestinationService destinationService) {

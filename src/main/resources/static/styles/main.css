@@ -1,0 +1,18 @@
+body {
+    background-image: url('https://wallpaperaccess.com/full/1881717.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.jumbotron {
+    background: none;
+    margin-bottom: 0px;
+}
+
+.navbar {
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    margin-left: 3px;
+
+
+}
