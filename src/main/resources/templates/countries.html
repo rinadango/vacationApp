@@ -8,20 +8,23 @@
 </head>
 <body>
 
-<!--<div><nav th:replace="~{fragments/navigation :: navFragment}"></nav></div>-->
-
-<div class="jumbotron mt-3">
-    <div class="container">
+<div class="container justify-content-center">
+    <div class="jumbotron mt-3">
         <h1 class="display-4">'ACION Travel</h1>
-        <p class="lead">Welcome to 'ACION Travel, your ultimate city travel guide! Get real-time weather updates and plan your journey with our selection of flights for your chosen city.
-            Need accommodation? We've got a myriad of booking options, from luxury hotels to budget-friendly hostels. Dive into 'ACION Travel today, and let's make your city travel unforgettable. Safe travels!</p>
+        <p class="lead">Welcome to 'ACION Travel, your ultimate city travel guide! Get real-time weather updates and
+            plan your journey with our selection of flights for your chosen city.
+            Need accommodation? We've got a myriad of booking options, from luxury hotels to budget-friendly hostels.
+            Dive into 'ACION Travel today, and let's make your city travel unforgettable. Safe travels!</p>
     </div>
 </div>
-
 <div class="container justify-content-center" style="padding-top: 14px">
     <div class="row">
-        <div class="col-md-3" th:each="country : ${countries}">
-            <div class="col"><a class="btn btn-info btn-lg btn-block" style="width:250px; padding: 50px; margin: 20px; border: none; font-size: x-large; background-color: #2e70a6" th:href="@{'/cities/' + ${country}}" th:text="${country}"></a></div>
+        <div class="col-md-4" th:each="country : ${countries}">
+            <div class="col">
+                <a class="btn btn-info btn-lg btn-block"
+                   style="width:250px; padding: 50px; margin: 20px; border: none; font-size: x-large; background-color: #2e70a6"
+                   th:href="@{'/cities/' + ${country}}" th:text="${country}"></a>
+            </div>
         </div>
     </div>
 </div>
