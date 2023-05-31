@@ -33,6 +33,7 @@ public class FormController {
         WeatherAPI weatherAPI = new WeatherAPI(apiKey);
         Weather currentWeather = weatherAPI.getWeather(city);
 
+        model.addAttribute("startingBudget", budget);
         model.addAttribute("temperature", currentWeather.getTemperature());
         model.addAttribute("feelsLike", currentWeather.getFeelsLike());
         model.addAttribute("humidity", currentWeather.getHumidity());
