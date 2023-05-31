@@ -1,18 +1,12 @@
 body {
     background-image: url('https://wallpaperaccess.com/full/1881717.jpg');
+    /*background-image: url('https://st4.depositphotos.com/37516442/38882/i/600/depositphotos_388828520-stock-photo-yellow-blue-suitcase-sun-hat.jpg');*/
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .jumbotron {
-    background: none;
+    background-color: white;
     margin-bottom: 0px;
 }
 
-.navbar {
-    border-bottom-style: solid;
-    border-bottom-width: thin;
-    margin-left: 3px;
-
-
-}
