@@ -10,3 +10,9 @@ body {
     margin-bottom: 0px;
 }
 
+.btn{
+    background-color: #2e70a6;
+    box-shadow: 5px 5px 8px #888888;
+    border: none;
+}
+
