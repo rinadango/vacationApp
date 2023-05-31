@@ -60,6 +60,8 @@ public class FormController {
         model.addAttribute("departureCity", departureCity);
         model.addAttribute("departureCountry", departureCountryLowerCase);
 
+        model.addAttribute("message", "SUCCESS");
+
         return "proposal";
     }
 
