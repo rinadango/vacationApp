@@ -17,7 +17,6 @@
 
 <div><nav th:replace="~{fragments/navigation :: navFragment}"></nav></div>
 
-<section th:if="${message=='SUCCESS'}">
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
       <h1 class="display-4" th:text="${#strings.capitalize(city)}" ></h1>
@@ -165,10 +164,6 @@
     </div>
   </div>
 </section>
-
-<section th:if="${message=='UNSUCCESSFUL'}"><h1>NOTHING TO SHOW</h1></section>
-
-
 
 </body>
 </html>
