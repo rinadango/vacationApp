@@ -37,6 +37,10 @@ public class DestinationController {
         return "cities";
     }
 
+    @GetMapping("/about")
+    public String getAbout(){
+        return "about";
+    }
 
 
 }

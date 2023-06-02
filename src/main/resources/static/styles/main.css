@@ -16,3 +16,15 @@ body {
     border: none;
 }
 
+.aboutStyle {
+    font-size: large;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0;
+
+}
+
+
