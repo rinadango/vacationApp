@@ -1,0 +1,66 @@
+USE vacationapp;
+
+drop table destination_info;
+
+CREATE TABLE destination_info (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    Country VARCHAR(50),
+    City VARCHAR(50),
+    Min_Budget INT,
+    Max_Budget INT
+);
+
+INSERT INTO destination_info (Country, City, Min_Budget, Max_Budget)
+VALUES
+    ('France', 'Paris', 1000, 3000),
+    ('France', 'Lyon', 800, 2500),
+    ('France', 'Marseille', 800, 2500),
+    ('France', 'Nice', 900, 2700),
+    ('France', 'Strasbourg', 700, 2200),
+    ('France', 'Bordeaux', 750, 2400),
+    ('France', 'Lille', 750, 2400),
+    ('Spain', 'Madrid', 900, 2800),
+    ('Spain', 'Barcelona', 1000, 3000),
+    ('Spain', 'Valencia', 800, 2500),
+    ('Spain', 'Seville', 750, 2300),
+    ('Spain', 'Granada', 700, 2200),
+    ('Spain', 'Malaga', 700, 2200),
+    ('Spain', 'Bilbao', 800, 2500),
+    ('Italy', 'Rome', 1000, 3000),
+    ('Italy', 'Milan', 1000, 3100),
+    ('Italy', 'Naples', 800, 2500),
+    ('Italy', 'Turin', 800, 2500),
+    ('Italy', 'Palermo', 700, 2200),
+    ('Italy', 'Bologna', 800, 2500),
+    ('Italy', 'Florence', 900, 2800),
+    ('Germany', 'Berlin', 950, 2900),
+    ('Germany', 'Hamburg', 900, 2800),
+    ('Germany', 'Munich', 950, 3000),
+    ('Germany', 'Cologne', 800, 2600),
+    ('Germany', 'Frankfurt', 850, 2700),
+    ('Germany', 'Stuttgart', 800, 2600),
+    ('Germany', 'Dusseldorf', 850, 2700),
+    ('UK', 'London', 1100, 3300),
+    ('UK', 'Manchester', 900, 2800),
+    ('UK', 'Birmingham', 850, 2700),
+    ('UK', 'Leeds', 800, 2500),
+    ('UK', 'Glasgow', 800, 2600),
+    ('UK', 'Liverpool', 800, 2600),
+    ('UK', 'Newcastle', 750, 2400),
+    ('Netherlands', 'Amsterdam', 950, 2900),
+    ('Netherlands', 'Rotterdam', 900, 2800),
+    ('Netherlands', 'The Hague', 850, 2700),
+    ('Netherlands', 'Utrecht', 800, 2600),
+    ('Netherlands', 'Eindhoven', 800, 2600),
+    ('Netherlands', 'Groningen', 750, 2400),
+    ('Netherlands', 'Maastricht', 750, 2400),
+    ('Belgium', 'Brussels', 900, 2800),
+    ('Belgium', 'Antwerp', 850, 2700),
+    ('Belgium', 'Ghent', 800, 2600),
+    ('Belgium', 'Charleroi', 750, 2400),
+    ('Belgium', 'Liege', 750, 2400),
+    ('Belgium', 'Bruges', 800, 2600),
+    ('Belgium', 'Leuven', 750, 2400);
+
+
+SELECT * FROM destination_info;
