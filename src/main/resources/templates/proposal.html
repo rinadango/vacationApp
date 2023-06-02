@@ -37,7 +37,12 @@
                         <p class="card-text" th:text="${endOfVacation}"></p>
                     </div>
                     <div class="card-footer bg-transparent border-dark text-center">
-                        <a class="btn btn-info" th:href="'/cities/' + ${#strings.capitalize(country)}">Edit</a>
+                        <th:block th:if="${country == 'united kingdom'}">
+                            <a class="btn btn-info" th:href="'/cities/UK'">Edit</a>
+                        </th:block>
+                        <th:block th:unless="${country == 'united kingdom'}">
+                            <a class="btn btn-info" th:href="'/cities/' + ${#strings.capitalize(country)} ">Edit</a>
+                        </th:block>
                     </div>
                 </div>
             </div>
@@ -45,7 +50,8 @@
         <div class="col-6 d-flex">
             <div id="weather-api" class="container mb-3">
                 <div class="card border-dark ml-5 card-height" style="width:25rem;">
-                    <div class="card-header">Current Weather Information for <span th:text="${#strings.capitalize(city)}"></span></div>
+                    <div class="card-header">Current Weather Information for <span
+                            th:text="${#strings.capitalize(city)}"></span></div>
                     <div class="card-body text-dark">
                         <div class="row">
                             <div class="col">
@@ -76,8 +82,8 @@
         <div class="col-sm-6">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Booking.com Search for <span th:text="${#strings.capitalize(city)}"></span></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">Booking.com Search for <span th:text="${#strings.capitalize(city)}"></span>
+                    </h5>
                     <form action="https://www.booking.com/searchresults.en-us.html" method="get" target="_blank">
                         <input type="hidden" name="ss" th:value="${city}"/>
                         <input type="hidden" name="checkin" th:value="${startOfVacation}"/>
@@ -97,7 +103,6 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">Kiwi.com Search for <span th:text="${#strings.capitalize(city)}"></span></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                     <form th:action="@{'https://www.kiwi.com/en/search/results/' + ${#strings.replace(departureCity, ' ', '-')}
           + '-' + ${#strings.replace(departureCountry, ' ', '-')} + '/' + ${#strings.replace(city, ' ', '-')}
           + '-' + ${#strings.replace(country, ' ', '-')} + '/' + ${startOfVacation} + '/' + ${endOfVacation}}"
@@ -116,8 +121,8 @@
         <div class="col-sm-12">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Wikipedia Search for <span th:text="${#strings.capitalize(city)}"></span></h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">Wikipedia Search for <span th:text="${#strings.capitalize(city)}"></span>
+                    </h5>
                     <form th:action="@{'https://en.wikipedia.org/wiki/' + ${city}}" target="_blank">
                         <button class="btn btn-info" type="submit">Wikipedia for <span
                                 th:text="${#strings.capitalize(city)}"></span></button>
