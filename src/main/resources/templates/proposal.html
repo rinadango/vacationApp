@@ -37,12 +37,12 @@
                         <p class="card-text" th:text="${endOfVacation}"></p>
                     </div>
                     <div class="card-footer bg-transparent border-dark text-center">
-                        <th:block th:if="${country == 'united kingdom'}">
+                        <div th:if="${country == 'united kingdom'}">
                             <a class="btn btn-info" th:href="'/cities/UK'">Edit</a>
-                        </th:block>
-                        <th:block th:unless="${country == 'united kingdom'}">
+                        </div>
+                        <div th:unless="${country == 'united kingdom'}">
                             <a class="btn btn-info" th:href="'/cities/' + ${#strings.capitalize(country)} ">Edit</a>
-                        </th:block>
+                        </div>
                     </div>
                 </div>
             </div>
