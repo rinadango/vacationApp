@@ -38,6 +38,4 @@ public class DestinationService {
         return this.destinationRepository.findAllByCountry(name);
     }
 
-
-
 }

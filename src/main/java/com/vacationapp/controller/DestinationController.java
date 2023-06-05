@@ -42,5 +42,4 @@ public class DestinationController {
         return "about";
     }
 
-
 }
