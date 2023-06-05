@@ -41,19 +41,17 @@ public class FormController {
         model.addAttribute("windSpeed", currentWeather.getWindSpeed());
         model.addAttribute("country", currentWeather.getCountry());
 
-
-        //pasirinkto miesto pavadinimas, bet lowercase (lektuvo bilietu linkas neveikia, jei is didziosios)
+        //Chosen city name, but lowercase (plane ticket link uses lowercase)
         String cityLowerCase = city.toLowerCase();
         model.addAttribute("city", cityLowerCase);
 
         model.addAttribute("startOfVacation", startOfVacation);
         model.addAttribute("endOfVacation", endOfVacation);
 
-        //budget'ui reikalingas papildomas tekstas aplink, kitaip linkas nefiltruoja pagal pasirinkta kaina
+        //budget needs additional text after value, otherwise search doesn't filter by price
         String budgetWithText = "price=EUR-min-" + budget + "-1";
         model.addAttribute("budget", budgetWithText);
 
-        //isvykimo miestas ir salis verciami i mazasias raides del lektuvo bilietu linko
         departureCity = departureCity.toLowerCase();
         String departureCountryLowerCase = departureCountry.toLowerCase();
 

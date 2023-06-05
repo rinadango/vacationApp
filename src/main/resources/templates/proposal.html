@@ -131,6 +131,44 @@
             </div>
         </div>
     </div>
+
+    <div class="row mb-3">
+        <!-- TourScanner -->
+        <div class="col-sm-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">TourScanner Search for <span th:text="${#strings.capitalize(city)}"></span>
+                    </h5>
+                    <form th:action="@{'https://tourscanner.com/s/' + ${city}}" target="_blank">
+                        <button class="btn btn-info" type="submit">
+                            Fun activities in <span th:text="${#strings.capitalize(city)}"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <!-- CarRental -->
+        <div class="col-sm-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Rent a car in <span th:text="${#strings.capitalize(city)}"></span></h5>
+                    <div th:if="${country == 'united kingdom'}">
+                        <form th:action="@{'https://www.kayak.com/cars/' + ${#strings.capitalize(city)} + ',United+kingdom/' + ${startOfVacation} + '/' + ${endOfVacation} + ';map?sort=rank_a'}" target="_blank">
+                            <button class="btn btn-info" type="submit">Rent cars in <span th:text="${#strings.capitalize(city)}"></span></button>
+                        </form>
+                    </div>
+                    <div th:unless="${country == 'united kingdom'}">
+                        <form th:action="@{'https://www.kayak.com/cars/' + ${#strings.capitalize(city)} + ',' + ${#strings.capitalize(country)} + '/' + ${startOfVacation} + '/' + ${endOfVacation} + ';map?sort=rank_a'}" target="_blank">
+                            <button class="btn btn-info" type="submit">Rent cars in <span th:text="${#strings.capitalize(city)}"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
