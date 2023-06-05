@@ -18,25 +18,25 @@ public class WeatherAPI {
 
     public Weather getWeather(String city) {
 
-        Weather currentWeather = new Weather(); //i sita objekta bus sudetos visos gautos vertes, paskui jas gausim ir naudosim su model.addAttribute
+        Weather currentWeather = new Weather(); //This object will store all values which we'll get from API, later we will need to use them with model.addAttribute()
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            //Geolocation API, skirtas miesta paversti i latitude ir longitude kintamuosius, kuriuos veliau naudojam weather API requeste
-            //Suformuojamas linkas su city ir apiKey vertem
-            //su The Hague yra problemu, nes du zodziai, todel reikia naudot if
+            //Geolocation API, needed to get latitude and longitude based on city name; we will use them in weather API request
+            //We construct a link with city and apiKey values
+            //The Hague has two words, so we use if for this
 
             String geolocationApiUrl;
             if (city.equals("The Hague")){geolocationApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=The-Hague&limit=1&appid=6d48803efc881326bec94c30df0addac";}
             else {geolocationApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + apiKey;}
 
-            //gaunam atsaka is geolocationApiUrl
+            //We get response from geolocationApiUrl
             JsonNode geolocationResponse = objectMapper.readTree(new URL(geolocationApiUrl));
 
             String latitude = "";
             String longitude = "";
 
-            //susirandam atsake latitude ir longitude
+            //We get longitude and latitude from response
             try {
                 if (geolocationResponse.isArray() && geolocationResponse.size() > 0) {
                     JsonNode firstItem = geolocationResponse.get(0);
@@ -48,90 +48,65 @@ public class WeatherAPI {
                 e.printStackTrace();
             }
 
-            //Patikrinu ar vertes tikrai gautos
-            System.out.println("Latitude: " + latitude);
-            System.out.println("Longitude: " + longitude);
-
-
             try {
-                //Weather API
-                //Toliau, kai matysit json atsaka, galit ji isimesti i https://jsonviewer.stack.hu/, tada bus aiskesne struktura
+                //Weather API json response is complicated, so use https://jsonviewer.stack.hu/ to view its' structure better
 
-
-                // Naudojam is Geolocation API gautas latitude ir longitude vertes uzklausoje bei apiKey
+                // Use latitude and longitude from Geolocation API and apiKey
                 String weatherApiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
-                //Gaunu atsaka is weatherApiUrl
+                //Gets response from weatherApiUrl
                 JsonNode weatherDataResponse = objectMapper.readTree(new URL(weatherApiUrl));
 
-                //ziuriu kaip atrodo atsakas
+                //See how response looks
                 System.out.println("weather data response: " + weatherDataResponse);
 
-                //Toliau, atsizvelgiant i weatherDataResponse struktura, is atsago gaunami reikalingi parametrai:
-                //"list" yra listas jsone, i kuri sudeta viskas, ka mums reikia gauti, todel pirma pasiimam "list"
+                //Based on weatherDataResponse structure, we get needed values:
+                //"list" is a list in json response, which has everything that we need to get, so we get "list" first
                 JsonNode mainList = weatherDataResponse.get("list");
-                //"0" yra objektas liste "list". Sitame "0" yra dabartines oro salygos (ko mums ir reikia). Yra ir kiti objektai "1", "2" ir t.t., kuriuose oro salygos rodomos kas 3 valandas i prieki
+                //"0" is an object in "list". This "0" contains current weather conditions inside (that's what we need).
+                // There are other objects like "1", "2" etc., which show weather conditions every 3 hours in future
                 JsonNode firstItemMain = mainList.get(0);
                 System.out.println("first item main: " + firstItemMain);
-                /*first item main: {"dt":1685404800,"main":{"temp":288.63,"feels_like":287.83,"temp_min":284.54,"temp_max":288.63,"pressure":1018,"sea_level":1018,"grnd_level":1006,"humidity":61,"temp_kf":4.09},
-                "weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03n"}],
-                "clouds":{"all":25},"wind":{"speed":0.97,"deg":335,"gust":0.98},"visibility":10000,"pop":0.05,
-                "sys":{"pod":"n"},"dt_txt":"2023-05-30 00:00:00"}
-                 */
 
-                //gaunam tik "main" objekta is firstItemMain
+                //We get only "main" object from firstItemMain
                 JsonNode mainObject = firstItemMain.get("main");
                 System.out.println("main object: " + mainObject);
-                /*main object: {"temp":288.63,"feels_like":287.83,"temp_min":284.54,"temp_max":288.63,"pressure":1018,"sea_level":1018,"grnd_level":1006,"humidity":61,"temp_kf":4.09}*/
 
-                //Gaunam temperature, feels like ir humidity is mainObject
-                double temperature = mainObject.get("temp").asDouble() - 273.15; //temperatura duoda farenheitais, todel paverciu i celsiju
+                //We get temperature, feels like and humidity from mainObject
+                double temperature = mainObject.get("temp").asDouble() - 273.15; //Temperature is in Farenheit, so we convert to Celsius
                 temperature = Math.round(temperature * 10) / 10.0;
-                System.out.println("temperature: " + temperature);
                 currentWeather.setTemperature(temperature);
 
                 double feelsLike = mainObject.get("feels_like").asDouble() - 273.15;
                 feelsLike = Math.round(feelsLike * 10) / 10.0;
-                System.out.println("feels like: " + feelsLike);
                 currentWeather.setFeelsLike(feelsLike);
 
-
                 int humidity = mainObject.get("humidity").asInt();
-                System.out.println("humidity: " + humidity);
                 currentWeather.setHumidity(humidity);
 
-                //[list]>{0}>[weather]>{0}>"description"
-                //liste [list] yra objektas {0}, kuriame yra listas {weather}, kuriame yra objektas {0}, kuris savo viduj turi "description"
+                //[list] ->{0} ->[weather] ->{0} ->"description"
+                //Explanation: list [list] contains an object {0}, which contains a list [weather], which has another {0} object inside, that contains "description"
                 JsonNode weatherList = firstItemMain.get("weather");
                 JsonNode firstItemWeather = weatherList.get(0);
-                System.out.println("first item weather: " + firstItemWeather);
-                /*first item weather: {"id":802,"main":"Clouds","description":"scattered clouds","icon":"03n"}*/
+                System.out.println("First item weather: " + firstItemWeather);
                 String description = firstItemWeather.get("description").asText();
-                System.out.println("weather condition: " + description);
                 currentWeather.setDescription(description);
 
 
-                //liste [list] yra objektas {0}, kuriame yra objektas {wind}, kuris viduj turi "speed"
+                //List [list] contains an object {0}, which contains an object {wind}, which contains "speed" (of wind)
                 JsonNode windObject = firstItemMain.get("wind");
                 System.out.println("wind object: " + windObject);
                 double windSpeed = windObject.get("speed").asDouble();
-                System.out.println("wind speed: " + windSpeed);
                 currentWeather.setWindSpeed(windSpeed);
 
-
-                //Gaunam sali, kurioje yra musu miestas (reikia liektuvo bilietui)
-                //city nera liste [list], jis atskirai, todel nenaudoju firstItemMain, imu tiesiai is viso atsako
+//We get country of inputted city (needed for plane tickets)
+                //"city" is not inside [list], it's separate, so we don't use firstItemMain, instead we take from weatherDataResponse
                 JsonNode cityObject = weatherDataResponse.get("city");
                 System.out.println("city object: " + cityObject);
-                //Salis pateikiama ISO kodu (pvz LT)
                 String countryISO = cityObject.get("country").asText();
-                System.out.println("country: " + countryISO);
 
-                //ISO koda vercia i pilna salies pavadinima, nes ISO netinka lektuvo bilietu linkui
+                //ISO code is converted to full country name, because ISO doesn't work for plane ticket link
                 Locale country = new Locale("", countryISO);
                 String countryFullName = country.getDisplayCountry(Locale.ENGLISH).toLowerCase();
-                System.out.println("country full name: " + countryFullName);
-                /*String formattedCountryName = countryFullName.toLowerCase();
-                System.out.println("country full name: " + formattedCountryName);*/
                 currentWeather.setCountry(countryFullName);
 
 
