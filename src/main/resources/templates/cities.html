@@ -12,7 +12,7 @@
         var currentDate = new Date().toISOString().split("T")[0];
 
         // Set the minimum date for the input field
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             var dateInput = document.getElementById("dateInput");
             dateInput.min = currentDate;
         });
@@ -21,29 +21,24 @@
 </head>
 <body>
 
-<div><nav th:replace="~{fragments/navigation :: navFragment}"></nav></div>
+<div>
+    <nav th:replace="~{fragments/navigation :: navFragment}"></nav>
+</div>
 
 <div class="container mt-5">
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <div class="col">
-            <div class="card mb-3" th:each="city : ${cities}">
-                <div class="card-body" th:text="${city.getCity()}">
-                </div>
-            </div>
+        <div class="col-md-2 mt-5 pt-5">
+            <ul class="list-group list-group-flush" th:each="city : ${cities}">
+                <li class="list-group-item font-weight-bold font-italic" th:text="${city.getCity()}"></li>
+            </ul>
         </div>
 
-<!--        <div class="col">-->
-<!--            <div class="col-4" th:each="city : ${cities}">-->
-<!--                <h3 class="btn btn-info m-2 " th:text="${city.getCity()}"></h3>-->
-<!--            </div>-->
-<!--        </div>-->
-
-        <div class="col">
-            <div class="container">
-                <form action="/proposal" method="POST" >
+        <div class="col-md-5">
+            <div class="container font-weight-bold">
+                <form action="/proposal" method="POST">
                     <div class="form-group">
-                        <label>City:</label>
+                        <label>City</label>
                         <select class="form-control" name="city">
                             <option th:each="c : ${cities}" th:value="${c.getCity()}" th:text="${c.getCity()}"/>
                         </select>
@@ -85,7 +80,5 @@
         </div>
     </div>
 </div>
-
 </body>
-
 </html>
