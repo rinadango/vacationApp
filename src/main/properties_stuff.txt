@@ -10,6 +10,6 @@ logging.level.org.hibernate.type=trace
 spring.datasource.password=admin
 spring.datasource.username=root
 
-chatApp.siteTitle = ACION
+chatApp.siteTitle = ATION
 
 api.key=6d48803efc881326bec94c30df0addac
